@@ -1,20 +1,33 @@
 # Quantile Change-Point Analysis
 
-An R example that simulates a time series with a change after observation 50, detects change points using PELT, and fits quantile regressions at 0.25, 0.50, and 0.75 within each segment.
+R research code for change-point detection and quantile regression, using simulated time series and annual temperature data from Tuscaloosa, Alabama.
 
-The analysis first removes a linear trend and adds it back to the fitted quantiles.
+## Scripts
+
+| File | Description |
+| --- | --- |
+| `simulation_pelt_quantile_regression.R` | Simulates a time series, detects change points, and fits quantile regressions within each segment. |
+| `tuscaloosa_pelt_quantile_regression.R` | Applies change-point detection and segment-wise quantile regression to annual temperature data. |
+| `Full_NPPELT.R` | Simulates a QAR process, runs a custom PELT implementation, and compares detected changes with EnvCpt. |
+
+## Requirements
+
+Install the R packages once:
+
+```r
+install.packages(c("quantreg", "EnvCpt", "changepoint"))
+```
+
+- The simulation and Tuscaloosa scripts require a separate definition of `PELT.quantloss()`. Load it first or save it in `PELT_quantloss.R` in the working directory.
+- The Tuscaloosa script also requires `Tuscaloosa_annual.txt` in the working directory.
+- `Full_NPPELT.R` defines its own detector, `pelt_nonparametric()`, which is a different function from `PELT.quantloss()`.
 
 ## How to run
 
-Requires R, `quantreg`, and a separate definition of `PELT.quantloss()`.
-
-Save the detector function in `PELT_quantloss.R` alongside the main script. Set that folder as your R working directory, then run:
+Set the repository folder as your R working directory and run one script at a time. For example:
 
 ```r
-install.packages("quantreg")  # Only needed once
 source("simulation_pelt_quantile_regression.R")
 ```
 
-## Output
-
-The script prints the detected change points and produces four plots: one change-point detection plot and three quantile regression plots.
+These scripts are research implementations under development.
